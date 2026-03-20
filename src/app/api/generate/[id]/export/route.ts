@@ -5,8 +5,9 @@ import { getRun } from '@/lib/db';
  * GET /api/generate/[id]/export
  * Returns: JSON bundle with brief, research, copy, sources
  */
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
-  const run = getRun(params.id);
+export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const run = getRun(id);
   if (!run) return NextResponse.json({ error: 'Run not found' }, { status: 404 });
   if (run.status !== 'completed') {
     return NextResponse.json({ error: 'Generation not complete' }, { status: 400 });

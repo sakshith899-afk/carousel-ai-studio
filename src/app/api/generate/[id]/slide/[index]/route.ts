@@ -9,13 +9,14 @@ import type { Slide } from '@/types';
  */
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string; index: string } },
+  { params }: { params: Promise<{ id: string; index: string }> },
 ) {
-  const run = getRun(params.id);
+  const { id, index } = await params;
+  const run = getRun(id);
   if (!run) return NextResponse.json({ error: 'Run not found' }, { status: 404 });
   if (!run.copy) return NextResponse.json({ error: 'No copy generated yet' }, { status: 400 });
 
-  const idx = parseInt(params.index, 10);
+  const idx = parseInt(index, 10);
   if (isNaN(idx) || idx < 0 || idx > 6) {
     return NextResponse.json({ error: 'Invalid slide index' }, { status: 400 });
   }
@@ -24,7 +25,7 @@ export async function PATCH(
   const slides = [...run.copy.slides];
   slides[idx] = { ...slides[idx], ...updates };
 
-  const updated = updateRun(params.id, {
+  const updated = updateRun(id, {
     copy: { ...run.copy, slides },
   });
 
