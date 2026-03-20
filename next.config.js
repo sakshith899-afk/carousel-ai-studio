@@ -3,9 +3,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
-    domains: ['example.com'], // replace with your image domains
+    remotePatterns: [
+      { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'oaidalleapiprodscus.blob.core.windows.net' },
+    ],
   },
 };
 

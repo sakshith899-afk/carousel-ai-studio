@@ -23,3 +23,10 @@ Thumbs.db
 .idea/
 .vscode/
 /.sass-cache/
+
+# Generated carousel data (runtime persistence)
+/data/
+
+# TypeScript build info
+*.tsbuildinfo
+next-env.d.ts
