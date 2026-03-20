@@ -1,14 +1,15 @@
+import type { Metadata } from 'next';
 import './globals.css';
 
-export const metadata = {
-  title: 'Carousel AI Studio',
-  description: 'AI-powered carousel generation tool',
+export const metadata: Metadata = {
+  title: 'Carousel AI Studio — Instagram Carousel Generator',
+  description: 'AI-powered Instagram carousel generation: research, copywriting, and visual design in one tool.',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="bg-black text-white">
-      <body>{children}</body>
+    <html lang="en">
+      <body className="min-h-screen bg-slate-950 text-white antialiased">{children}</body>
     </html>
   );
 }
